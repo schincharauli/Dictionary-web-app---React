@@ -5,6 +5,7 @@ import moonIcon from "../public/images/icon-moon.svg";
 
 function App() {
   const [theme, setTheme] = useState("light");
+  const [selectedFont, setSelectedFont] = useState("Arial");
 
   const changeTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -16,14 +17,30 @@ function App() {
       document.documentElement.classList.remove("dark");
     }
   };
+  const handleFontChange = (e) => {
+    setSelectedFont(e.target.value);
+  };
 
   return (
-    <div className={`h-screen ${theme === "dark" ? "bg-dark" : ""}`}>
-      <nav>
-        <span lassName="pl-3">
-          <img src={logo} alt="" />
+    <div
+      style={{ fontFamily: selectedFont }}
+      className={`h-screen ${theme === "dark" ? "bg-dark" : ""}`}
+    >
+      <nav className="flex justify-between">
+        <span>
+          <img className="p-3" src={logo} alt="" />
         </span>
-
+        <select value={selectedFont} onChange={handleFontChange}>
+          <option value="Inconsolata" className=" text-base">
+            Mono
+          </option>
+          <option value="Inter" className=" text-base">
+            Inter
+          </option>
+          <option value="Lora" className=" text-base">
+            Sans Serif
+          </option>
+        </select>
         <button>
           <label className="relative inline-flex items-center cursor-pointer">
             <input type="checkbox" className="sr-only peer" />
@@ -43,7 +60,7 @@ function App() {
       </nav>
 
       <section>
-        <p className={`dark:text-white font-Inter`}>
+        {/* <p className={`dark:text-white font-Inter`}>
           This text will be white in dark mode.
         </p>
         <p className="dark:text-white font-Lora">
@@ -51,6 +68,12 @@ function App() {
         </p>
         <p className="dark:text-white font-Inconsolata">
           This text will be white in dark mode.
+        </p> */}
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti aut
+          earum culpa eius perspiciatis quaerat eum, consectetur asperiores
+          tempore exercitationem totam excepturi ullam animi, cumque facere fuga
+          minus at pariatur.
         </p>
       </section>
     </div>
