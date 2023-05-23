@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import logo from "../public/images/logo.svg";
 import moonIcon from "../public/images/icon-moon.svg";
+import velvetMoon from "../public/images/velvet-moon.svg";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -17,8 +18,17 @@ function App() {
       document.documentElement.classList.remove("dark");
     }
   };
+
   const handleFontChange = (e) => {
     setSelectedFont(e.target.value);
+  };
+
+  const renderMoon = () => {
+    if (theme === "dark") {
+      return <img src={velvetMoon} alt="" className="moon-icon-violet" />;
+    } else {
+      return <img src={moonIcon} alt="" />;
+    }
   };
 
   return (
@@ -41,34 +51,21 @@ function App() {
             Sans Serif
           </option>
         </select>
+        <div className="h-8 w-0.5 mt-3 bg-gray-300"></div>
+
         <button>
-          <label className="relative inline-flex items-center cursor-pointer">
+          <label className="relative inline-flex items-center cursor-pointer m-3">
             <input type="checkbox" className="sr-only peer" />
             <div
               onClick={changeTheme}
               className={`w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 dark:peer-focus:ring-violet rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-violet`}
             ></div>
-            <span>
-              <img
-                src={moonIcon}
-                alt=""
-                className={"dark:path-stroke-violet"}
-              />
-            </span>
+            <span className="ml-6">{renderMoon()}</span>
           </label>
         </button>
       </nav>
 
       <section>
-        {/* <p className={`dark:text-white font-Inter`}>
-          This text will be white in dark mode.
-        </p>
-        <p className="dark:text-white font-Lora">
-          This text will be white in dark mode.
-        </p>
-        <p className="dark:text-white font-Inconsolata">
-          This text will be white in dark mode.
-        </p> */}
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti aut
           earum culpa eius perspiciatis quaerat eum, consectetur asperiores
