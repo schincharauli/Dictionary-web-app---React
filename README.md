@@ -40,7 +40,7 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 ### Links
 
 - Solution URL: https://github.com/schincharauli/Dictionary-web-app---React
-- Live Site URL: https://lustrous-cascaron-61624b.netlify.app/
+- Live Site URL: https://curious-kleicha-bf3076.netlify.app/
 
 ## My process
 
