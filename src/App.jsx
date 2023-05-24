@@ -57,7 +57,7 @@ function App() {
   return (
     <div
       style={{ fontFamily: selectedFont }}
-      className={`h-full w-full pr-3 md:pl-6 md:pr-6  xl:pl-72 xl:pr-72 dark:h-full xl:pt-6 ${
+      className={`h-full w-full pr-3 md:pl-6 md:pr-6  xl:pl-72 xl:pr-72 xl:pt-6 ${
         theme === "dark" ? "bg-dark " : ""
       }`}
     >
@@ -84,7 +84,7 @@ function App() {
 
           <button>
             <label className="relative inline-flex items-center cursor-pointer m-3">
-              <input type="" className="sr-only peer" />
+              <input type="checkbox" className="sr-only peer" />
               <div
                 onClick={changeTheme}
                 className={`w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 dark:peer-focus:ring-violet rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-violet`}
