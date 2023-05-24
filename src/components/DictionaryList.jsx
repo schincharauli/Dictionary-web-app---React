@@ -6,14 +6,6 @@ const DictionaryList = ({ result }) => {
   console.log({ result });
   const { word, phonetics, meanings } = result;
 
-  if (result.error) {
-    return (
-      <div className="h-screen ml-4 mt-2 text-red">
-        <h1>{result.error}</h1>
-      </div>
-    );
-  }
-
   function playMeaning() {
     try {
       const audioComponent = phonetics.find((component) => component.audio);

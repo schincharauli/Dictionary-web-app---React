@@ -57,7 +57,7 @@ function App() {
   return (
     <div
       style={{ fontFamily: selectedFont }}
-      className={`h-full w-full pr-3 md:pl-6 md:pr-6  xl:pl-72 xl:pr-72 xl:pt-6 ${
+      className={`h-full w-full pr-3 md:pl-6 md:pr-6  xl:pl-72 xl:pr-72 dark:h-full xl:pt-6 ${
         theme === "dark" ? "bg-dark " : ""
       }`}
     >
@@ -120,7 +120,34 @@ function App() {
           </div>
         </form>
       </section>
-      <section>{result && <DictionaryList {...{ result }} />}</section>
+
+      <section>
+        {result && !result.error ? (
+          <DictionaryList result={result} />
+        ) : (
+          result && (
+            <div>
+              {result.type === "empty" ? (
+                <p className="text-white">{result.error}</p>
+              ) : (
+                <div className="custom-error-interface flex flex-col justify-center items-center  h-72">
+                  <h1 className="font-bold dark:text-white">
+                    No Definitions Found
+                  </h1>
+                  <span className="pt-3 " role="img" aria-label="Emoji">
+                    {"\ud83d\ude12"} {/* U+1F612 */}
+                  </span>
+                  <p className="text-greyTextLightMode text-center p-4">
+                    Sorry pal, we couldn't find definitions for the word you
+                    were looking for. You can try the search again at later time
+                    or head to the web instead.
+                  </p>
+                </div>
+              )}
+            </div>
+          )
+        )}
+      </section>
     </div>
   );
 }
