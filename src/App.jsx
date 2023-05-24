@@ -39,10 +39,17 @@ function App() {
 
   async function handleSearch() {
     try {
-      const res = await axios.get(`${api}/${searchWord}`);
-      console.log(res, "res");
-      setResult(res.data[0]);
+      if (searchWord.trim() === "") {
+        setResult(null);
+        setResult({ error: "Whoops, can't be empty..." });
+      } else {
+        const res = await axios.get(`${api}/${searchWord}`);
+        console.log(res, "res");
+        setResult(res.data[0]);
+      }
     } catch (e) {
+      setResult({ error: "No Definitions Found" });
+
       console.log({ e });
     }
   }
@@ -61,9 +68,9 @@ function App() {
           </a>
         </span>
 
-        <div className="flex">
+        <div className="flex ">
           <select
-            className={`text-base mr-3 ${
+            className={`text-base mr-3 hover:cursor-pointer ${
               theme === "dark" ? "dark:bg-dark && text-white" : ""
             }`}
             value={selectedFont}
@@ -77,11 +84,12 @@ function App() {
 
           <button>
             <label className="relative inline-flex items-center cursor-pointer m-3">
-              <input type="checkbox" className="sr-only peer" />
+              <input type="" className="sr-only peer" />
               <div
                 onClick={changeTheme}
                 className={`w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 dark:peer-focus:ring-violet rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-violet`}
               ></div>
+
               <span className="ml-6">{renderMoon()}</span>
             </label>
           </button>
@@ -99,8 +107,6 @@ function App() {
                   handleSearch();
                 }
               }}
-              type="search"
-              id="default-search"
               className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-00"
               placeholder="Search..."
               required
@@ -109,7 +115,7 @@ function App() {
             <img
               src={searchIcon}
               onClick={handleSearch}
-              className="text-white absolute right-2.5 bottom-2.5 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2"
+              className=" hover:cursor-pointer text-white absolute right-2.5 bottom-2.5 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2"
             />
           </div>
         </form>

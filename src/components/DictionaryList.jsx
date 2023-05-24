@@ -6,6 +6,14 @@ const DictionaryList = ({ result }) => {
   console.log({ result });
   const { word, phonetics, meanings } = result;
 
+  if (result.error) {
+    return (
+      <div className="h-screen ml-4 mt-2 text-red">
+        <h1>{result.error}</h1>
+      </div>
+    );
+  }
+
   function playMeaning() {
     try {
       const audioComponent = phonetics.find((component) => component.audio);
@@ -59,7 +67,7 @@ const DictionaryList = ({ result }) => {
         <section>
           <div className="flex mt-5">
             <h3 className="text-greyTextLightMode ">Synonyms</h3>
-            <p className="ml-6 text-violet font-bold">
+            <p className="ml-6 text-violet font-bold hover:cursor-pointer">
               {meanings[0].synonyms[0]}
             </p>
           </div>
