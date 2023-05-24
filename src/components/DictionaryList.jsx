@@ -8,16 +8,18 @@ const DictionaryList = ({ result }) => {
 
   function playMeaning() {
     try {
-      let audio = new Audio(phonetics[2].audio);
-      audio.play();
+      const audioComponent = phonetics.find((component) => component.audio);
+      if (audioComponent) {
+        const audio = new Audio(audioComponent.audio);
+        audio.play();
+      }
     } catch (error) {
       console.log(error);
     }
   }
-
   return (
     <>
-      <div className="ml-4 mt-6">
+      <div className="h-screen ml-4 mt-6">
         <section>
           <div className="flex justify-between ml-0 mr-4">
             <div>
@@ -42,7 +44,7 @@ const DictionaryList = ({ result }) => {
           <h3 className="text-greyTextLightMode mt-5">Meaning</h3>
           <div>
             {meanings[0].definitions.map((definition, index) => (
-              <div className="flex items-center">
+              <div className="flex items-center sm:ml-5  md:ml-6 ">
                 <div className="mt-3 mr-3 w-1 h-1 rounded-lg bg-violet"></div>
                 <p
                   className=" text-sm mt-4 w-11/12 text-textColor dark:text-white"
@@ -70,7 +72,7 @@ const DictionaryList = ({ result }) => {
           <h3 className="text-greyTextLightMode mt-5">Meaning</h3>
           <div>
             {meanings[1].definitions.map((definition, index) => (
-              <div className="flex items-center">
+              <div className="flex items-center sm:ml-5 md:ml-6 ">
                 <div className="mt-3 mr-3 w-1 h-1 rounded-lg bg-violet"></div>
                 <p
                   className=" text-sm mt-4 w-11/12 text-textColor dark:text-white"
@@ -86,7 +88,7 @@ const DictionaryList = ({ result }) => {
           </div>
         </section>
         <section className="pb-12">
-          <div className="w-11/12 h-0.5 bg-gray-200 ml-3 mr-4 rounded-lg"></div>
+          <div className="w-12/12 h-0.5 bg-gray-200 ml-3 mr-4 rounded-lg"></div>
           <h3 className="text-greyTextLightMode mt-3 underline-offset-2">
             Source
           </h3>
@@ -94,7 +96,7 @@ const DictionaryList = ({ result }) => {
             href={result.sourceUrls}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs mt-3 dark:text-white flex "
+            className="text-xs mt-3 dark:text-white flex sm:ml-5  md:ml-6 "
           >
             {result.sourceUrls}
             <img className="ml-2" src={iconNewWindow} alt="new-window-icon" />
