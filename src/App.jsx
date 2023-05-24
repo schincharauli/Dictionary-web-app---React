@@ -4,16 +4,18 @@ import logo from "../public/images/logo.svg";
 import moonIcon from "../public/images/icon-moon.svg";
 import velvetMoon from "../public/images/velvet-moon.svg";
 import searchIcon from "../public/images/icon-search.svg";
+import DictionaryList from "./components/DictionaryList";
+import axios from "axios";
 
 function App() {
   const [theme, setTheme] = useState("light");
   const [selectedFont, setSelectedFont] = useState("Lora");
-  const [inputValue, setInputValue] = useState("");
+  const [searchWord, setSearchWord] = useState("");
+  const [result, setResult] = useState(null);
 
   const changeTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-
     if (newTheme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
@@ -33,14 +35,22 @@ function App() {
     }
   };
 
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
-  };
+  const api = "https://api.dictionaryapi.dev/api/v2/entries/en";
+
+  async function handleSearch() {
+    try {
+      const res = await axios.get(`${api}/${searchWord}`);
+      console.log(res, "res");
+      setResult(res.data[0]);
+    } catch (e) {
+      console.log({ e });
+    }
+  }
 
   return (
     <div
       style={{ fontFamily: selectedFont }}
-      className={`h-screen ${theme === "dark" ? "bg-dark" : ""}`}
+      className={`h-screen ${theme === "dark" ? "bg-dark h-auto" : ""}`}
     >
       <nav className="flex justify-between">
         <span>
@@ -73,26 +83,25 @@ function App() {
 
       <section className="p-3">
         <form>
-          <div class="relative">
+          <div className="relative">
             <input
-              value={inputValue}
-              onChange={handleChange}
+              onChange={(e) => setSearchWord(e.target.value)}
               type="search"
               id="default-search"
-              class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-00"
               placeholder="Search..."
               required
             />
 
             <img
               src={searchIcon}
-              type="submit"
-              class="text-white absolute right-2.5 bottom-2.5 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2"
+              onClick={handleSearch}
+              className="text-white absolute right-2.5 bottom-2.5 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2"
             />
           </div>
         </form>
-        <p>Input Value: {inputValue}</p>
       </section>
+      <section>{result && <DictionaryList {...{ result }} />}</section>
     </div>
   );
 }
