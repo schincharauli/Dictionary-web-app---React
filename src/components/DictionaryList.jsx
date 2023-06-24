@@ -2,7 +2,7 @@ import React from "react";
 import iconPlay from "./icons/icon-play.svg";
 import iconNewWindow from "./icons/icon-new-window.svg";
 
-const DictionaryList = ({ result }) => {
+const DictionaryList = ({ result, changeTheme, theme, setTheme }) => {
   console.log({ result });
   const { word, phonetics, meanings } = result;
 
@@ -19,7 +19,11 @@ const DictionaryList = ({ result }) => {
   }
   return (
     <>
-      <div className="h-screen ml-4 mt-6">
+      <div
+        className={`h-screen ml-4 mt-6 ${
+          theme === "dark" ? "dark:bg-dark && text-white" : ""
+        }`}
+      >
         <section>
           <div className="flex justify-between ml-0 mr-4">
             <div>

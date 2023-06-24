@@ -57,8 +57,8 @@ function App() {
   return (
     <div
       style={{ fontFamily: selectedFont }}
-      className={`h-full w-full pr-3 md:pl-6 md:pr-6  xl:pl-72 xl:pr-72 xl:pt-6 ${
-        theme === "dark" ? "bg-dark " : ""
+      className={`h-full w-full pr-3 md:pl-6 md:pr-6  xl:pl-72 xl:pr-72 xl:pt-6  ${
+        theme === "dark" ? "bg-dark" : ""
       }`}
     >
       <nav className="flex justify-between">
@@ -90,7 +90,9 @@ function App() {
                 className={`w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 dark:peer-focus:ring-violet rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-violet`}
               ></div>
 
-              <span className="ml-6">{renderMoon()}</span>
+              <span className="ml-6" onClick={changeTheme}>
+                {renderMoon()}
+              </span>
             </label>
           </button>
         </div>
@@ -123,7 +125,12 @@ function App() {
 
       <section>
         {result && !result.error ? (
-          <DictionaryList result={result} />
+          <DictionaryList
+            result={result}
+            changeTheme={changeTheme}
+            theme={theme}
+            setTheme={setTheme}
+          />
         ) : (
           result && (
             <div>
